@@ -16,5 +16,4 @@ Not included generic entry like id and time stamps, the `users` table contains `
 The `posts` table has `user_id`, which connecting this table with users table, and `content` for obvious purpose.
 For `comments` table, I added `user_id` and `post_id` to associate it with corresponding tables, and `body` for actual comments.
 
-
-> You could experience this repository's client-side by accessing `https://predycode.herokuapp.com`
+> You could experience this repository's client-side by accessing [this URL.](https://predycode.herokuapp.com)
