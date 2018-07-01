@@ -27,10 +27,10 @@ router.post('/login', async (req, res, next) => {
         if (error) return next(error)
         const body = { id: user.id, email: user.email };
         const token = jwt.sign({ user: body }, process.env.JWT_SECRET);
-        const id = jwt.verify(token, process.env.JWT_SECRET).user.id;
+        const userdata = jwt.verify(token, process.env.JWT_SECRET).user;
         // console.log(jwt.verify(token, process.env.JWT_SECRET));
-        
-        return res.redirect(`/api/users/?id=${id}`);
+
+        return res.json({ message: 'Signin successful', userdata });
       });
     } catch (error) {
       return next(error);
