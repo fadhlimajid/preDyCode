@@ -1,9 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const usersRouter = require('./users');
+const postsRouter = require('./posts');
+const commentsRouter = require('./comments');
+const authRouter = require('./auth');
+const indexRouter = require('./home');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const loggedin = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+}
 
-module.exports = router;
+// indexRouter.get('/home',  function (req, res) {
+//   res.send(req.session)
+// })
+
+// indexRouter.get('/logout', function (req, res) {
+//   req.logout()
+
+// })
+
+module.exports = { indexRouter, usersRouter, postsRouter, commentsRouter, authRouter };

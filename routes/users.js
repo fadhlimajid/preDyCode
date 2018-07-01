@@ -1,9 +1,20 @@
-var express = require('express');
-var router = express.Router();
+require('module-alias/register');
+const Sequelize = require('sequelize');
+const router = require('express').Router();
+const userServices = require('../domains/services/user.services');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const users = new userServices(Sequelize.Op);
+
+router.get('/', async function (req, res) {
+  return await users.findAll(req.query, res);
+})
+
+router.patch('/edit', async function (req, res) {
+  return await users.edit(req, res);
+})
+
+router.delete('/delete', async function (req, res) {
+  return await users.delete(req, res);
+})
 
 module.exports = router;
